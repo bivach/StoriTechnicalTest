@@ -43,7 +43,8 @@ Used MVVM Architecture with DataSource, Repository, ViewModel, Compose UI.
 - Add more Unit and UI tests
 - Add a features module with submodules to extract the auth and transactions screens from the app for scalability
 - Handle errors between layer with generic Result class to propagate the correct error message for example when user already created, no internet etc(time consuming for a take home project)
-- 
+- Split FirebaseDataSourceImpl into 3 different classes: FirebaseFirestoreDataSource, FirebaseAuthDataSource and FirebaseStorageDataSource.
+  
 #### Test User or Create a new one
 email = example@example.com
 password = password
