@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "107332699732",
+    "project_id": "stori-technical-test",
+    "storage_bucket": "stori-technical-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107332699732:android:b5d3b8dfa15b8b43b1cfc1",
+        "android_client_info": {
+          "package_name": "com.example.storitechnicaltest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9IgCAl9rvCqc369JNt2zdfBeDFNbwrWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

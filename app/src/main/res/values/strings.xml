@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">StoriTechnicalTest</string>
+    <string name="account_movements">Account movements</string>
+    <string name="log_out">Log Out</string>
+    <string name="id_photo">ID Photo</string>
+    <string name="retry">Retry</string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="take_id_photo">Take ID Photo</string>
+    <string name="register">Register</string>
+    <string name="fill_form_with_fake_data">Fill form with fake data</string>
+    <string name="login">Login</string>
+    <string name="transaction_id">Transaction ID: %1$s</string>
+    <string name="amount">Amount: %1$s</string>
+    <string name="date">Date: %1$s</string>
+    <string name="welcome">Welcome, %1$s %2$s</string>
+    <string name="balance">Balance: %1$s</string>
+</resources>

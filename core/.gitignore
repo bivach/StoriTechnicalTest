@@ -1,0 +1,14 @@
+*.iml
+.idea
+/*/.idea/*
+!/.idea/codeStyles
+*.jks
+.gradle
+/local.properties
+/gradlew.bat
+/app/releaseCandidate
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
