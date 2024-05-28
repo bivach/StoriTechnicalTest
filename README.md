@@ -27,8 +27,9 @@ This will be the screen that shows the information of the user's bank details:
 
 When clicking on a movement, the user must be sent to the details of the movement.
 
+
 #### Architecture
-Used MVVM Architecture usign DataSource, Repository, ViewModel, Compose UI.
+Used MVVM Architecture with DataSource, Repository, ViewModel, Compose UI.
 
 #### Frameworks
 - DI: Hilt
@@ -42,11 +43,12 @@ Used MVVM Architecture usign DataSource, Repository, ViewModel, Compose UI.
 - Add more Unit and UI tests
 - Add a features module with submodules to extract the auth and transactions screens from the app for scalability
 - Handle errors between layer with generic Result class to propagate the correct error message for example when user already created, no internet etc(time consuming for a take home project)
+- 
+#### Test User or Create a new one
+email = example@example.com
+password = password
 
 ## Demo
 
-https://github.com/bivach/StoriTechnicalTest/assets/20892810/929b74f7-2b29-4ab4-9bb0-6b6b23a8872f
-
-
-
+https://github.com/bivach/StoriTechnicalTest/assets/20892810/7743b914-bec9-4da9-a0c7-39de44627a99
 
