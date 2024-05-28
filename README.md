@@ -27,6 +27,7 @@ This will be the screen that shows the information of the user's bank details:
 
 When clicking on a movement, the user must be sent to the details of the movement.
 
+
 #### Architecture
 Used MVVM Architecture with DataSource, Repository, ViewModel, Compose UI.
 
@@ -45,8 +46,5 @@ Used MVVM Architecture with DataSource, Repository, ViewModel, Compose UI.
 
 ## Demo
 
-https://github.com/bivach/StoriTechnicalTest/assets/20892810/929b74f7-2b29-4ab4-9bb0-6b6b23a8872f
-
-
-
+https://github.com/bivach/StoriTechnicalTest/assets/20892810/7743b914-bec9-4da9-a0c7-39de44627a99
 
