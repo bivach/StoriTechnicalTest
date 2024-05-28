@@ -40,6 +40,7 @@ Used MVVM Architecture usign DataSource, Repository, ViewModel, Compose UI.
 
 #### TODO/To improve
 - Add more Unit and UI tests
+- Add a features module with submodules to extract the auth and transactions screens from the app for scalability
 - Handle errors between layer with generic Result class to propagate the correct error message for example when user already created, no internet etc(time consuming for a take home project)
 
 ## Demo
