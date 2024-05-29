@@ -1,6 +1,8 @@
 package com.example.storitechnicaltest.login
 
+import android.app.Activity
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +34,7 @@ fun LoginScreen(navController: NavController) {
     val viewModel: LoginViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     val formState by viewModel.formState.collectAsState()
+    val context = LocalContext.current
 
     when (uiState) {
         is LoginViewModel.LoginUIState.Start -> {
@@ -60,8 +63,12 @@ fun LoginScreen(navController: NavController) {
 
         is LoginViewModel.LoginUIState.Error -> {
             val message = (uiState as LoginViewModel.LoginUIState.Error).message
-            Toast.makeText(LocalContext.current, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    BackHandler {
+        (context as? Activity)?.finish()
     }
 }
 
