@@ -49,7 +49,12 @@ fun LoginScreen(navController: NavController) {
 
         is LoginViewModel.LoginUIState.Success -> {
             LaunchedEffect(Unit) {
-                navController.navigate("home")
+                navController.navigate("home") {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
             }
         }
 

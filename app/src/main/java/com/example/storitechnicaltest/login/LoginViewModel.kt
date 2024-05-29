@@ -70,8 +70,8 @@ class LoginViewModel @Inject constructor(
     }
 
     data class LoginFormState(
-        val email: String = "",
-        val password: String = "",
+        val email: String = "example@example.com",
+        val password: String = "password",
         val emailError: String? = null,
         val passwordError: String? = null,
     )
