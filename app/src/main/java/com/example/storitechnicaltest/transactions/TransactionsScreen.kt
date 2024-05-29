@@ -1,6 +1,8 @@
 package com.example.storitechnicaltest.transactions
 
+import android.app.Activity
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -39,6 +41,7 @@ import com.example.storitechnicaltest.R
 fun TransactionsScreen(navController: NavController) {
     val viewModel: TransactionsViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
+    val context = LocalContext.current
 
     Column(modifier = Modifier
         .fillMaxSize()
@@ -67,7 +70,7 @@ fun TransactionsScreen(navController: NavController) {
             }
             is TransactionsViewModel.TransactionsUIState.Error -> {
                 val message = (uiState as TransactionsViewModel.TransactionsUIState.Error).message
-                Toast.makeText(LocalContext.current, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -87,6 +90,10 @@ fun TransactionsScreen(navController: NavController) {
                 }
             }
         }
+    }
+
+    BackHandler {
+        (context as? Activity)?.finish()
     }
 }
 
