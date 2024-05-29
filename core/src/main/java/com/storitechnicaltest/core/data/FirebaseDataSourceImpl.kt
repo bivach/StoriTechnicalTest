@@ -17,24 +17,24 @@ class FirebaseDataSourceImpl @Inject constructor(
     private val storage: FirebaseStorage
 ) : FirebaseDataSource {
 
-    override suspend fun registerUser(user: User, photoUri: Uri): Boolean {
-        return try {
-            // Upload user photo file
-            val photoUrl = uploadPhoto(photoUri)
-            // Create Firebase user with firebaseAuth
-            val result = firebaseAuth
-                .createUserWithEmailAndPassword(user.email, user.password)
-                .await()
-            // Save user to fireStore
-            val userId = result.user?.uid ?: ""
-            fireStore.collection("users")
-                .document(userId)
-                .set(user.copy(id = userId, photoUrl = photoUrl ?: ""))
-                .await()
-            true
-        } catch (e: Exception) {
-            false
-        }
+    override suspend fun registerUser(user: User): String? {
+        val result = firebaseAuth
+            .createUserWithEmailAndPassword(user.email, user.password)
+            .await()
+        return result.user?.uid
+    }
+
+    override suspend fun registerUserInFirestore(user: User) {
+        fireStore.collection("users")
+            .document(user.id)
+            .set(user)
+            .await()
+    }
+
+    override suspend fun uploadPhoto(photoUri: Uri): String {
+        val ref = storage.reference.child("photos/${UUID.randomUUID()}.jpg")
+        ref.putFile(photoUri).await()
+        return ref.downloadUrl.await().toString()
     }
 
     override suspend fun loginUser(email: String, password: String): Boolean {
@@ -54,6 +54,10 @@ class FirebaseDataSourceImpl @Inject constructor(
             null
         }
     }
+
+    override fun isUserLoggedIn(): Boolean = firebaseAuth.currentUser?.uid != null
+
+    override fun logout() = firebaseAuth.signOut()
 
     override suspend fun pushTransactions(transactions: List<Transaction>) {
         val userId =
@@ -97,20 +101,6 @@ class FirebaseDataSourceImpl @Inject constructor(
                 .document(transactionId)
                 .get()
                 .await()
-        } catch (e: Exception) {
-            null
-        }
-    }
-
-    override fun isUserLoggedIn(): Boolean = firebaseAuth.currentUser?.uid != null
-
-    override fun logout() = firebaseAuth.signOut()
-
-    private suspend fun uploadPhoto(photoUri: Uri): String? {
-        return try {
-            val ref = storage.reference.child("photos/${UUID.randomUUID()}.jpg")
-            ref.putFile(photoUri).await()
-            ref.downloadUrl.await().toString()
         } catch (e: Exception) {
             null
         }

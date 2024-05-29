@@ -9,8 +9,24 @@ class AuthRepositoryImpl @Inject constructor(
     private val dataSource: FirebaseDataSource
 ) : AuthRepository {
 
-    override suspend fun registerUser(user: User, photoUri: Uri): Boolean =
-        dataSource.registerUser(user, photoUri)
+    override suspend fun registerUser(user: User, photoUri: Uri): Boolean {
+        return try {
+            // Upload user photo file
+            val photoUrl = dataSource.uploadPhoto(photoUri) ?: return false
+            // Create Firebase user with firebaseAuth
+            val registeredUserId = dataSource.registerUser(user) ?: return false
+            // Save user to fireStore
+            dataSource.registerUserInFirestore(
+                user.copy(
+                    photoUrl = photoUrl,
+                    id = registeredUserId
+                )
+            )
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 
     override suspend fun loginUser(email: String, password: String) =
         dataSource.loginUser(email, password)
@@ -22,3 +38,4 @@ class AuthRepositoryImpl @Inject constructor(
     override fun logout() = dataSource.logout()
 
 }
+

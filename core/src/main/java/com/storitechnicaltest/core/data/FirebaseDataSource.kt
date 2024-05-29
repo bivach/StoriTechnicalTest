@@ -7,17 +7,29 @@ import com.storitechnicaltest.core.model.User
 
 interface FirebaseDataSource {
     /**
-     * Registers a new user with Firebase authentication and Firestore.
+     * Registers a new user with Firebase Authentication using the provided user details.
      *
-     * This method attempts to register a new user by uploading the provided photo URI to Firebase Storage,
-     * creating a Firebase user using the provided email and password with FirebaseAuth, and then saving
-     * the user data to Firestore. If any step of the registration process fails, the method returns false.
-     *
-     * @param user The user object containing registration information.
-     * @param photoUri The URI of the user's photo.
-     * @return true if the user registration is successful, false otherwise.
+     * @param user The user details including email and password.
+     * @return The unique user ID (UID) of the registered user if registration is successful, null otherwise.
+     * @throws FirebaseAuthException if the registration fails.
      */
-    suspend fun registerUser(user: User, photoUri: Uri): Boolean
+    suspend fun registerUser(user: User): String?
+    /**
+     * Registers the user in Firestore by saving the user details in the "users" collection.
+     *
+     * @param user The user details including user ID to be saved in Firestore.
+     * @throws FirestoreException if the Firestore operation fails.
+     */
+    suspend fun registerUserInFirestore(user: User)
+
+    /**
+     * Uploads a photo to Firebase Storage and returns the download URL of the uploaded photo.
+     *
+     * @param photoUri The URI of the photo to be uploaded.
+     * @return The download URL of the uploaded photo.
+     * @throws StorageException if the upload operation fails.
+     */
+    suspend fun uploadPhoto(photoUri: Uri): String?
 
     /**
      * Attempts to log in a user with the provided email and password using Firebase authentication.
@@ -42,6 +54,23 @@ interface FirebaseDataSource {
      * @return The DocumentSnapshot containing the user's data, or null if not found or an error occurs.
      */
     suspend fun getUserData(): DocumentSnapshot?
+
+    /**
+     * Checks if a user is currently logged in.
+     *
+     * This method checks if a user is currently logged in by verifying the presence
+     * of a user ID in the FirebaseAuth instance.
+     *
+     * @return true if a user is logged in, false otherwise.
+     */
+    fun isUserLoggedIn(): Boolean
+
+    /**
+     * Logs out the currently authenticated user.
+     *
+     * This method signs out the currently authenticated user using the FirebaseAuth instance.
+     */
+    fun logout()
 
     /**
      * Pushes a list of transactions to Firestore under the current user's account.
@@ -73,21 +102,4 @@ interface FirebaseDataSource {
      * @return A [DocumentSnapshot] representing the transaction if found, or null if an error occurs.
      */
     suspend fun getTransactionById(transactionId: String): DocumentSnapshot?
-
-    /**
-     * Checks if a user is currently logged in.
-     *
-     * This method checks if a user is currently logged in by verifying the presence
-     * of a user ID in the FirebaseAuth instance.
-     *
-     * @return true if a user is logged in, false otherwise.
-     */
-    fun isUserLoggedIn(): Boolean
-
-    /**
-     * Logs out the currently authenticated user.
-     *
-     * This method signs out the currently authenticated user using the FirebaseAuth instance.
-     */
-    fun logout()
 }

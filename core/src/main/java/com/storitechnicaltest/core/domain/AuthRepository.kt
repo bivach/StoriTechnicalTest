@@ -9,10 +9,13 @@ import com.storitechnicaltest.core.model.User
 interface AuthRepository {
 
     /**
-     * Registers a new user.
+     * Registers a new user by uploading a photo, creating a Firebase Authentication user,
+     * and saving the user details in Firestore.
      *
-     * @param user The user object containing registration information.
-     * @return True if the user is successfully registered, false otherwise.
+     * @param user The user details including email and password.
+     * @param photoUri The URI of the photo to be uploaded.
+     * @return `true` if the registration is successful, `false` otherwise.
+     * @throws Exception if any operation in the registration process fails.
      */
     suspend fun registerUser(user: User, photoUri: Uri): Boolean
 
