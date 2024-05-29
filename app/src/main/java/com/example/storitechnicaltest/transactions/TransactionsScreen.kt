@@ -57,7 +57,12 @@ fun TransactionsScreen(navController: NavController) {
                 val state = uiState as TransactionsViewModel.TransactionsUIState.Success
                 UserScreen(state, navController) {
                     viewModel.logout()
-                    navController.navigate("login")
+                    navController.navigate("login") {
+                        popUpTo(navController.graph.startDestinationId) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 }
             }
             is TransactionsViewModel.TransactionsUIState.Error -> {

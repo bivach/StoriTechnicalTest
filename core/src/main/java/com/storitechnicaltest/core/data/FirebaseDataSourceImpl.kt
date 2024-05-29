@@ -49,7 +49,10 @@ class FirebaseDataSourceImpl @Inject constructor(
     override suspend fun getUserData(): DocumentSnapshot? {
         return try {
             val userId = firebaseAuth.currentUser?.uid ?: ""
-            FirebaseFirestore.getInstance().collection("users").document(userId).get().await()
+            fireStore.collection("users")
+                .document(userId)
+                .get()
+                .await()
         } catch (e: Exception) {
             null
         }
@@ -92,17 +95,13 @@ class FirebaseDataSourceImpl @Inject constructor(
     }
 
     override suspend fun getTransactionById(transactionId: String): DocumentSnapshot? {
-        return try {
-            val userId =
-                firebaseAuth.currentUser?.uid ?: throw IllegalStateException("User not logged in")
-            fireStore.collection("users")
-                .document(userId)
-                .collection("transactions")
-                .document(transactionId)
-                .get()
-                .await()
-        } catch (e: Exception) {
-            null
-        }
+        val userId =
+            firebaseAuth.currentUser?.uid ?: throw IllegalStateException("User not logged in")
+        return fireStore.collection("users")
+            .document(userId)
+            .collection("transactions")
+            .document(transactionId)
+            .get()
+            .await()
     }
 }
