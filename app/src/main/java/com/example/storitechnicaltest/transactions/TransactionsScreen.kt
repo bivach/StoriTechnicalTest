@@ -78,6 +78,12 @@ fun TransactionsScreen(navController: NavController) {
                         }
                         Button(onClick = {
                             viewModel.logout()
+                            navController.navigate("login") {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    inclusive = true
+                                }
+                                launchSingleTop = true
+                            }
                         }) {
                             Text(stringResource(id = R.string.log_out))
                         }
