@@ -9,16 +9,13 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -40,9 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
-import coil.transform.CircleCropTransformation
 import com.example.storitechnicaltest.R
+import com.example.storitechnicaltest.ui.components.CircularImage
 import java.io.File
 
 @Composable
@@ -232,23 +228,11 @@ fun RegisterForm(
             Text(stringResource(R.string.fill_form_with_fake_data))
         }
         Spacer(modifier = Modifier.height(16.dp))
-        formState.photoUri?.let {
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                val painter = rememberImagePainter(
-                    data = it,
-                    builder = {
-                        transformations(CircleCropTransformation())
-                    }
-                )
-                Image(
-                    painter = painter,
-                    contentDescription = "ID Photo",
-                    modifier = Modifier.size(100.dp)
-                )
-            }
+        formState.photoUri?.let { uri ->
+            CircularImage(
+                uri = uri,
+                contentDescription = "ID Photo"
+            )
         }
     }
 }
