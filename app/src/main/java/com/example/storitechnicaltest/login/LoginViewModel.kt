@@ -18,22 +18,6 @@ class LoginViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<LoginUIState>(LoginUIState.Start)
     val uiState = _uiState.asStateFlow()
 
-    fun loginUser() {
-        val currentState = _formState.value
-        viewModelScope.launch {
-            _uiState.emit(LoginUIState.Loading)
-            val result = authRepository.loginUser(currentState.email.trim(), currentState.password)
-            if (result) {
-                _uiState.emit(LoginUIState.Success)
-            } else {
-                _uiState.emit(LoginUIState.Error("Authentication failed"))
-                //Make Sure UI consumes both states
-                delay(100)
-                _uiState.emit(LoginUIState.Start)
-            }
-        }
-    }
-
     private val _formState = MutableStateFlow(LoginFormState())
     val formState = _formState.asStateFlow()
 
@@ -60,6 +44,22 @@ class LoginViewModel @Inject constructor(
             )
         }
         return valid
+    }
+
+    fun loginUser() {
+        val currentState = _formState.value
+        viewModelScope.launch {
+            _uiState.emit(LoginUIState.Loading)
+            val result = authRepository.loginUser(currentState.email.trim(), currentState.password)
+            if (result) {
+                _uiState.emit(LoginUIState.Success)
+            } else {
+                _uiState.emit(LoginUIState.Error("Authentication failed"))
+                //Make Sure UI consumes both states
+                delay(100)
+                _uiState.emit(LoginUIState.Start)
+            }
+        }
     }
 
     sealed class LoginUIState {

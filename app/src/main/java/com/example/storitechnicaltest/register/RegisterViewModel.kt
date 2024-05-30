@@ -20,38 +20,6 @@ class RegisterViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<RegisterUIState>(RegisterUIState.Start)
     val uiState = _uiState.asStateFlow()
 
-    /**
-     * Registers a new user with a photo.
-     *
-     * This method launches a coroutine to handle the registration process. It updates the UI state
-     * to show loading, attempts to register the user with the provided photo URI,
-     * and updates the UI state accordingly based on the registration result.
-     *
-     */
-    fun registerUserWithPhoto() {
-        val currentState = _formState.value
-        val user = User(
-            email = currentState.email,
-            password = currentState.password,
-            firstName = currentState.firstName,
-            lastName = currentState.lastName
-        )
-        currentState.photoUri?.let { uri ->
-            viewModelScope.launch {
-                _uiState.emit(RegisterUIState.Loading)
-                val result = authRepository.registerUser(user, uri)
-                if (result) {
-                    _uiState.emit(RegisterUIState.Success)
-                } else {
-                    _uiState.emit(RegisterUIState.Error("Registration failed"))
-                    //Make Sure UI consumes both states
-                    delay(100)
-                    _uiState.emit(RegisterUIState.Start)
-                }
-            }
-        }
-    }
-
     private val _formState = MutableStateFlow(RegisterFormState())
     val formState = _formState.asStateFlow()
 
@@ -89,6 +57,38 @@ class RegisterViewModel @Inject constructor(
 
         return emailError == null && passwordError == null && firstNameError == null &&
                 lastNameError == null && photoUriError == null
+    }
+
+    /**
+     * Registers a new user with a photo.
+     *
+     * This method launches a coroutine to handle the registration process. It updates the UI state
+     * to show loading, attempts to register the user with the provided photo URI,
+     * and updates the UI state accordingly based on the registration result.
+     *
+     */
+    fun registerUserWithPhoto() {
+        val currentState = _formState.value
+        val user = User(
+            email = currentState.email,
+            password = currentState.password,
+            firstName = currentState.firstName,
+            lastName = currentState.lastName
+        )
+        currentState.photoUri?.let { uri ->
+            viewModelScope.launch {
+                _uiState.emit(RegisterUIState.Loading)
+                val result = authRepository.registerUser(user, uri)
+                if (result) {
+                    _uiState.emit(RegisterUIState.Success)
+                } else {
+                    _uiState.emit(RegisterUIState.Error("Registration failed"))
+                    //Make Sure UI consumes both states
+                    delay(100)
+                    _uiState.emit(RegisterUIState.Start)
+                }
+            }
+        }
     }
 
     sealed class RegisterUIState {
