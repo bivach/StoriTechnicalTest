@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,6 +41,7 @@ import androidx.core.content.FileProvider
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import com.example.storitechnicaltest.R
 import java.io.File
 
@@ -59,7 +61,7 @@ fun RegisterScreen(navController: NavController) {
         if (result.resultCode == Activity.RESULT_OK) {
             photoFile?.let {
                 val uri = FileProvider.getUriForFile(context, AUTHORITY, it)
-                viewModel.updateFormState(formState.copy(photoUri = uri))
+                viewModel.updateFormState(formState.copy(photoUri = uri, photoUriError = null))
             }
         }
     }
@@ -107,8 +109,10 @@ fun RegisterScreen(navController: NavController) {
 
         is RegisterViewModel.RegisterUIState.Success -> {
             LaunchedEffect(Unit) {
-                Toast.makeText(context,
-                    context.getString(R.string.registration_successful), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.registration_successful), Toast.LENGTH_SHORT
+                ).show()
                 navController.navigate("login")
             }
         }
@@ -217,18 +221,34 @@ fun RegisterForm(
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             viewModel.updateFormState(
-                fakeData()
+                formState.copy(
+                    email = "example@example.com",
+                    password = "password",
+                    firstName = "John",
+                    lastName = "Doe"
+                )
             )
         }) {
             Text(stringResource(R.string.fill_form_with_fake_data))
         }
         Spacer(modifier = Modifier.height(16.dp))
         formState.photoUri?.let {
-            Image(
-                painter = rememberImagePainter(it),
-                contentDescription = "ID Photo",
-                modifier = Modifier.size(100.dp)
-            )
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                val painter = rememberImagePainter(
+                    data = it,
+                    builder = {
+                        transformations(CircleCropTransformation())
+                    }
+                )
+                Image(
+                    painter = painter,
+                    contentDescription = "ID Photo",
+                    modifier = Modifier.size(100.dp)
+                )
+            }
         }
     }
 }
@@ -239,19 +259,3 @@ private fun createImageFile(context: Context): File {
 }
 
 const val AUTHORITY = "com.example.storitechnicaltest.fileprovider"
-
-
-fun fakeData(): RegisterViewModel.RegisterFormState {
-    val fakeEmail = "example@example.com"
-    val fakePassword = "password"
-    val fakeFirstName = "John"
-    val fakeLastName = "Doe"
-
-    return RegisterViewModel.RegisterFormState(
-        email = fakeEmail,
-        password = fakePassword,
-        firstName = fakeFirstName,
-        lastName = fakeLastName,
-        photoUri = null // No photo URI for fake data
-    )
-}
