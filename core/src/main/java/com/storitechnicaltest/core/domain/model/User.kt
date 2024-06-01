@@ -1,4 +1,4 @@
-package com.storitechnicaltest.core.model
+package com.storitechnicaltest.core.domain.model
 
 import java.text.NumberFormat
 import java.util.Locale

@@ -1,7 +1,7 @@
-package com.storitechnicaltest.core.domain
+package com.storitechnicaltest.core.data
 
-import com.storitechnicaltest.core.data.FirebaseDataSource
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.domain.TransactionsRepository
+import com.storitechnicaltest.core.domain.model.Transaction
 import javax.inject.Inject
 
 class TransactionsRepositoryImpl @Inject constructor(

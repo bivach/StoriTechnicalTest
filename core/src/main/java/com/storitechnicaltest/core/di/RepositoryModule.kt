@@ -1,7 +1,7 @@
 package com.storitechnicaltest.core.di
 
-import com.storitechnicaltest.core.domain.AuthRepositoryImpl
-import com.storitechnicaltest.core.domain.TransactionsRepositoryImpl
+import com.storitechnicaltest.core.data.AuthRepositoryImpl
+import com.storitechnicaltest.core.data.TransactionsRepositoryImpl
 import com.storitechnicaltest.core.domain.AuthRepository
 import com.storitechnicaltest.core.domain.TransactionsRepository
 import dagger.Binds

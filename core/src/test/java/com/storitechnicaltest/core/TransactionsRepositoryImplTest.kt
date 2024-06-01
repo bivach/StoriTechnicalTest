@@ -9,9 +9,9 @@ import org.mockito.MockitoAnnotations
 import org.junit.Assert.assertEquals
 import com.google.firebase.firestore.DocumentSnapshot
 import com.storitechnicaltest.core.data.FirebaseDataSource
-import com.storitechnicaltest.core.domain.RandomTransactionsGenerator
-import com.storitechnicaltest.core.domain.TransactionsRepositoryImpl
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.data.RandomTransactionsGenerator
+import com.storitechnicaltest.core.data.TransactionsRepositoryImpl
+import com.storitechnicaltest.core.domain.model.Transaction
 import kotlinx.coroutines.test.runTest
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner

@@ -5,8 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.storitechnicaltest.core.model.Transaction
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.domain.model.Transaction
+import com.storitechnicaltest.core.domain.model.User
 import kotlinx.coroutines.tasks.await
 import java.util.UUID
 import javax.inject.Inject

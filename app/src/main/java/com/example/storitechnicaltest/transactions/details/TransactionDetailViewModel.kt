@@ -3,7 +3,7 @@ package com.example.storitechnicaltest.transactions.details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.storitechnicaltest.core.domain.TransactionsRepository
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.domain.model.Transaction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

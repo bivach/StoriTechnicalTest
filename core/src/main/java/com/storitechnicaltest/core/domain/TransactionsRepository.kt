@@ -1,6 +1,6 @@
 package com.storitechnicaltest.core.domain
 
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.domain.model.Transaction
 
 
 /**

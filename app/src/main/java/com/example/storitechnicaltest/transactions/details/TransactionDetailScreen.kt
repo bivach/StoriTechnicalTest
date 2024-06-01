@@ -17,7 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.domain.model.Transaction
 
 @Composable
 fun TransactionDetailScreen(

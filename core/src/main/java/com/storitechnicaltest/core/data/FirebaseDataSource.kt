@@ -2,8 +2,8 @@ package com.storitechnicaltest.core.data
 
 import android.net.Uri
 import com.google.firebase.firestore.DocumentSnapshot
-import com.storitechnicaltest.core.model.Transaction
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.domain.model.Transaction
+import com.storitechnicaltest.core.domain.model.User
 
 interface FirebaseDataSource {
     /**

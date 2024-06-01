@@ -1,7 +1,7 @@
 package com.storitechnicaltest.core.domain
 
 import android.net.Uri
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.domain.model.User
 
 /**
  * Repository interface for user authentication-related operations.

@@ -1,6 +1,6 @@
-package com.storitechnicaltest.core.domain
+package com.storitechnicaltest.core.data
 
-import com.storitechnicaltest.core.model.Transaction
+import com.storitechnicaltest.core.domain.model.Transaction
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject

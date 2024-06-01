@@ -13,8 +13,8 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.WriteBatch
 import com.google.firebase.storage.FirebaseStorage
 import com.storitechnicaltest.core.data.FirebaseDataSourceImpl
-import com.storitechnicaltest.core.model.Transaction
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.domain.model.Transaction
+import com.storitechnicaltest.core.domain.model.User
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
@@ -212,7 +212,8 @@ class FirebaseDataSourceImplTest {
         firebaseDataSource.pushTransactions(transactions)
 
         // Then
-        verify(mockBatch, times(transactions.size)).set(any(DocumentReference::class.java), any(Transaction::class.java))
+        verify(mockBatch, times(transactions.size)).set(any(DocumentReference::class.java), any(
+            Transaction::class.java))
         verify(mockBatch).commit()
     }
 

@@ -1,8 +1,8 @@
-package com.storitechnicaltest.core.domain
+package com.storitechnicaltest.core.data
 
 import android.net.Uri
-import com.storitechnicaltest.core.data.FirebaseDataSource
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.domain.AuthRepository
+import com.storitechnicaltest.core.domain.model.User
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

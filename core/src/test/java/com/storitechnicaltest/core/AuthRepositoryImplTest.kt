@@ -3,8 +3,8 @@ package com.storitechnicaltest.core
 import android.net.Uri
 import com.google.firebase.firestore.DocumentSnapshot
 import com.storitechnicaltest.core.data.FirebaseDataSource
-import com.storitechnicaltest.core.domain.AuthRepositoryImpl
-import com.storitechnicaltest.core.model.User
+import com.storitechnicaltest.core.data.AuthRepositoryImpl
+import com.storitechnicaltest.core.domain.model.User
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
